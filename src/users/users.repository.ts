@@ -18,7 +18,7 @@ export class UsersRepository {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const { username, email, password, confirmPassword } = createUserDto;
+    const { name, surname, email, password } = createUserDto;
 
     const existingUser = await this.usersRepository.findOne({
       where: { email },
@@ -28,20 +28,17 @@ export class UsersRepository {
       throw new HttpException('Email already in use', HttpStatus.BAD_REQUEST);
     }
 
-    if (password !== confirmPassword) {
-      throw new HttpException('Passwords do not match', HttpStatus.BAD_REQUEST);
-    }
-
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User();
-    newUser.username = username;
+    newUser.name = name;
+    newUser.surname = surname;
     newUser.password = hashedPassword;
     newUser.email = email;
 
     this.usersRepository.save(newUser);
 
-    return 'user Successfully Registered';
+    return 'User Successfully Registered';
   }
 
   async findOneByEmail(email: string) {
@@ -50,6 +47,10 @@ export class UsersRepository {
       .where('user.email = :email', { email })
       .addSelect('user.password')
       .getOne();
+  }
+
+  async findAll() {
+    return this.usersRepository.find();
   }
 
   async findOne(id: number): Promise<User> {

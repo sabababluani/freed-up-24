@@ -5,7 +5,10 @@ import { Column, Entity } from 'typeorm';
 @Entity()
 export class User extends BaseEntity {
   @Column()
-  username: string;
+  name: string;
+
+  @Column()
+  surname: string;
 
   @Column({ select: false })
   password: string;
@@ -22,4 +25,7 @@ export class User extends BaseEntity {
 
   @Column({ default: false })
   banned: boolean;
+
+  @Column({ default: 1000 })
+  money: number;
 }
