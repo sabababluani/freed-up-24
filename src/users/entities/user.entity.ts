@@ -23,9 +23,6 @@ export class User extends BaseEntity {
   })
   role: string;
 
-  @Column({ default: false })
-  banned: boolean;
-
   @Column({ default: 1000 })
   money: number;
 }

@@ -39,10 +39,6 @@ export class AuthService {
       throw new UnauthorizedException();
     }
 
-    if (user.banned) {
-      throw new UnauthorizedException('Access denied. You are banned.');
-    }
-
     const payload = { sub: user.id, email: user.email, role: user.role };
     const token = await this.jwtService.signAsync(payload);
 
@@ -60,10 +56,6 @@ export class AuthService {
         'The email or password you entered is incorrect',
         HttpStatus.BAD_REQUEST,
       );
-    }
-
-    if (user.banned) {
-      throw new UnauthorizedException('Access denied. You are banned.');
     }
 
     if (user.role !== Role.ADMIN) {
