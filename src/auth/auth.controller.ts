@@ -25,7 +25,7 @@ export class AuthController {
   @Roles(Role.ADMIN)
   @Public()
   @Post('login/admin')
-  async loginAdmin(@Body() createUserDto: CreateUserDto) {
+  async loginAdmin(@Body() createUserDto: loginUserDto) {
     return this.authService.loginAdmin(createUserDto);
   }
 }

@@ -45,7 +45,7 @@ export class AuthService {
     return { token };
   }
 
-  async loginAdmin(createUserDto: CreateUserDto) {
+  async loginAdmin(createUserDto: loginUserDto) {
     const { email, password } = createUserDto;
     const user = await this.usersService.findOneByEmail(email);
     const isPasswordCorrect =
