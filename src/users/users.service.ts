@@ -19,6 +19,10 @@ export class UsersService {
     return await this.usersRepository.findAll(page, limit);
   }
 
+  async me(userId: number) {
+    return await this.usersRepository.me(userId);
+  }
+
   async findOne(id: number) {
     return await this.usersRepository.findOne(id);
   }

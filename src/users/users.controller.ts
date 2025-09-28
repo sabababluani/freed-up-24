@@ -7,6 +7,7 @@ import {
   Delete,
   Query,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -22,6 +23,12 @@ export class UsersController {
   @Get()
   findAll(@Query('page') page: number = 1, @Query('limit') limit: number = 10) {
     return this.usersService.findAll(page, limit);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('me')
+  getMe(@Req() req: any) {
+    return this.usersService.me(req.user.sub);
   }
 
   @UseGuards(AuthGuard)

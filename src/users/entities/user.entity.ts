@@ -23,10 +23,10 @@ export class User extends BaseEntity {
   })
   role: string;
 
-  @Column()
+  @Column({ nullable: true, default: 'Одобренный' })
   status: string;
 
-  @Column({ nullable: true, default: 'Одобренный' })
+  @Column({ nullable: true })
   phone: string;
 
   @Column({ default: 1000 })

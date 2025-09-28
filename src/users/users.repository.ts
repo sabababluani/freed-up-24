@@ -41,6 +41,14 @@ export class UsersRepository {
     return 'User Successfully Registered';
   }
 
+  async me(userId: number) {
+    const user = await this.usersRepository.findOne({
+      where: { id: userId },
+    });
+
+    return user;
+  }
+
   async findOneByEmail(email: string) {
     return this.usersRepository
       .createQueryBuilder('user')
