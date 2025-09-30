@@ -29,6 +29,6 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   phone: string;
 
-  @Column({ default: 1000 })
+  @Column({ default: 0 })
   money: number;
 }
