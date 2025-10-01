@@ -11,7 +11,7 @@ async function bootstrap() {
     }),
   );
   app.enableCors({
-    origin: ['*'],
+    origin: ['https://crypto-wallet-02qr.onrender.com'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
