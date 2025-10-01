@@ -22,7 +22,7 @@ import { User } from './entities/user.entity';
     }),
   ],
   controllers: [UsersController],
-  providers: [UsersService , UsersRepository],
+  providers: [UsersService, UsersRepository],
   exports: [UsersService],
 })
 export class UsersModule {}
