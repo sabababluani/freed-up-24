@@ -25,7 +25,9 @@ import { AuthModule } from './auth/auth.module';
         database: configService.get<string>('DATABASE_NAME'),
         autoLoadEntities: true,
         synchronize: true,
-        ssl: false,
+        ssl: {
+          rejectUnauthorized: false,
+        },
       }),
     }),
 
