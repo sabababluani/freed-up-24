@@ -1,11 +1,13 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
+import { AuthGuard } from 'src/auth/guard/jwt-auth.guard';
 
 @Controller('transactions')
 export class TransactionsController {
   constructor(private readonly transactionsService: TransactionsService) {}
 
+  @UseGuards(AuthGuard)
   @Post(':id')
   create(
     @Body() createTransactionDto: CreateTransactionDto,
