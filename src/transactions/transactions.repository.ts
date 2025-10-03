@@ -26,9 +26,9 @@ export class TransactionRepository {
 
     const transaction = this.transactionRepository.create({
       ...createTransactionDto,
-      user, // associate user
+      user,
     });
-
-    return await this.transactionRepository.save(transaction);
+    await this.transactionRepository.save(transaction);
+    return { message: 'Successfuly created transaction' };
   }
 }

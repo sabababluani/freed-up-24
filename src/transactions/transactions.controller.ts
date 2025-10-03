@@ -13,7 +13,6 @@ export class TransactionsController {
     @Body() createTransactionDto: CreateTransactionDto,
     @Param('id') id: string,
   ) {
-    console.log(id);
     return this.transactionsService.create(createTransactionDto, +id);
   }
 
