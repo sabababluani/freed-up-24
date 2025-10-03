@@ -1,6 +1,7 @@
 import { Role } from 'src/auth/guard/enum/role.enum';
 import { BaseEntity } from 'src/common/base.entity';
-import { Column, Entity } from 'typeorm';
+import { Transaction } from 'src/transactions/entities/transaction.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()
 export class User extends BaseEntity {
@@ -31,4 +32,9 @@ export class User extends BaseEntity {
 
   @Column({ default: 0 })
   money: number;
+
+  @OneToMany(() => Transaction, (transaction) => transaction.user, {
+    eager: true,
+  })
+  transactions: Transaction[];
 }
