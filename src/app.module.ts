@@ -6,6 +6,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { User } from './users/entities/user.entity';
+import { Transaction } from './transactions/entities/transaction.entity';
 
 @Module({
   imports: [
@@ -24,13 +26,14 @@ import { AuthModule } from './auth/auth.module';
         password: configService.get<string>('DATABASE_PASSWORD'),
         database: configService.get<string>('DATABASE_NAME'),
         autoLoadEntities: true,
+        entities: [User, Transaction],
         synchronize: true,
         ssl: {
           rejectUnauthorized: false,
         },
       }),
     }),
-
+    TypeOrmModule.forFeature([User, Transaction]),
     AuthModule,
   ],
   controllers: [AppController],
