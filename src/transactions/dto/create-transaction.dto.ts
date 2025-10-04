@@ -5,5 +5,5 @@ export class CreateTransactionDto {
   title: string;
 
   @IsNumber()
-  transactionMoney: number;
+  transactionMoney: string;
 }

@@ -8,7 +8,7 @@ export class Transaction extends BaseEntity {
   title: string;
 
   @Column()
-  transactionMoney: number;
+  transactionMoney: string;
 
   @ManyToOne(() => User, (user) => user.transactions, { onDelete: 'CASCADE' })
   user: User;
