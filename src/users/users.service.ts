@@ -15,8 +15,8 @@ export class UsersService {
     return await this.usersRepository.findOneByEmail(email);
   }
 
-  async findAll(page: number, limit: number) {
-    return await this.usersRepository.findAll(page, limit);
+  async findAll() {
+    return await this.usersRepository.findAll();
   }
 
   async me(userId: number) {

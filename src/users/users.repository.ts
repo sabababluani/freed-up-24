@@ -57,24 +57,8 @@ export class UsersRepository {
       .getOne();
   }
 
-  async findAll(page: number, limit: number) {
-    const skip = (page - 1) * limit;
-
-    const [data, total] = await Promise.all([
-      this.usersRepository.find({
-        skip,
-        take: limit,
-      }),
-      this.usersRepository.count(),
-    ]);
-
-    return {
-      data,
-      total,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
-    };
+  async findAll() {
+    return this.usersRepository.find();
   }
 
   async findOne(id: number): Promise<User> {

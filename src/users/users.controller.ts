@@ -5,7 +5,6 @@ import {
   Patch,
   Param,
   Delete,
-  Query,
   UseGuards,
   Req,
 } from '@nestjs/common';
@@ -21,8 +20,8 @@ export class UsersController {
 
   @UseGuards(AuthGuard)
   @Get()
-  findAll(@Query('page') page: number = 1, @Query('limit') limit: number = 10) {
-    return this.usersService.findAll(page, limit);
+  findAll() {
+    return this.usersService.findAll();
   }
 
   @UseGuards(AuthGuard)
