@@ -18,7 +18,7 @@ export class UsersRepository {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const { name, surname, email, password } = createUserDto;
+    const { name, surname, email, phone, password } = createUserDto;
 
     const existingUser = await this.usersRepository.findOne({
       where: { email },
@@ -35,6 +35,7 @@ export class UsersRepository {
     newUser.surname = surname;
     newUser.password = hashedPassword;
     newUser.email = email;
+    newUser.phone = phone;
 
     this.usersRepository.save(newUser);
 
