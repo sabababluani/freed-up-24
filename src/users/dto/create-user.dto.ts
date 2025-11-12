@@ -18,5 +18,5 @@ export class CreateUserDto {
 
   @IsNumber()
   @IsOptional()
-  money?: number;
+  money?: string;
 }

@@ -31,7 +31,7 @@ export class User extends BaseEntity {
   phone: string;
 
   @Column({ default: 0 })
-  money: number;
+  money: string;
 
   @OneToMany(() => Transaction, (transaction) => transaction.user, {
     eager: true,
