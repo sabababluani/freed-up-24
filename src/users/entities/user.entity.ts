@@ -30,7 +30,7 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   phone: string;
 
-  @Column({ default: 0 })
+  @Column({ default: '0' })
   money: string;
 
   @OneToMany(() => Transaction, (transaction) => transaction.user, {
