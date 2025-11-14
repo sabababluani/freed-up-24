@@ -18,7 +18,7 @@ export class UsersRepository {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const { name, surname, email, phone, password } = createUserDto;
+    const { name, surname, email, phone, password, currency } = createUserDto;
 
     const existingUser = await this.usersRepository.findOne({
       where: { email },
@@ -36,6 +36,7 @@ export class UsersRepository {
     newUser.password = hashedPassword;
     newUser.email = email;
     newUser.phone = phone;
+    newUser.currency = currency || 'USD';
 
     this.usersRepository.save(newUser);
 
@@ -74,7 +75,7 @@ export class UsersRepository {
     return user;
   }
 
-  async update(id: number, updateUserDto: Partial<User>) {
+  async update(id: number, updateUserDto: CreateUserDto) {
     const user = await this.findOne(id);
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);

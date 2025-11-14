@@ -19,4 +19,8 @@ export class CreateUserDto {
   @IsString()
   @IsOptional()
   money?: string;
+
+  @IsString()
+  @IsOptional()
+  currency?: string;
 }

@@ -33,6 +33,9 @@ export class User extends BaseEntity {
   @Column({ default: '0' })
   money: string;
 
+  @Column({ default: 'USD' })
+  currency: string;
+
   @OneToMany(() => Transaction, (transaction) => transaction.user, {
     eager: true,
   })
