@@ -30,8 +30,8 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   phone: string;
 
-  @Column({ default: '0' })
-  money: string;
+  @Column({ default: 0 })
+  money: number;
 
   @Column({ default: 'USD' })
   currency: string;
