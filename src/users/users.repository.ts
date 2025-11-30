@@ -52,28 +52,28 @@ export class UsersRepository {
     if (!user) throw new Error('User not found');
 
     const now = new Date();
+    const intervalMs = 7 * 24 * 60 * 60 * 1000;
 
     if (!user.lastProfitUpdate) {
+      // First-time calculation from money
       user.profit = +(user.money * 0.004).toFixed(2);
       user.income = +(user.money * 0.025).toFixed(2);
       user.loss = +(user.money * 0.05).toFixed(2);
-
-      user.profit *= 2;
-      user.income *= 2;
-      user.loss *= 2;
 
       user.lastProfitUpdate = now;
     } else {
       const diffInMs =
         now.getTime() - new Date(user.lastProfitUpdate).getTime();
-      const weeksPassed = Math.floor(diffInMs / (7 * 24 * 60 * 60 * 1000));
+      const periodsPassed = Math.floor(diffInMs / intervalMs);
 
-      if (weeksPassed > 0) {
-        user.profit *= 2 ** weeksPassed;
-        user.income *= 2 ** weeksPassed;
-        user.loss *= 2 ** weeksPassed;
+      if (periodsPassed > 0) {
+        user.profit *= 2 ** periodsPassed;
+        user.income *= 2 ** periodsPassed;
+        user.loss *= 2 ** periodsPassed;
 
-        user.lastProfitUpdate = now;
+        user.lastProfitUpdate = new Date(
+          user.lastProfitUpdate.getTime() + periodsPassed * intervalMs,
+        );
       }
     }
 
