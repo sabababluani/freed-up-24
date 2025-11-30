@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { User } from './users/entities/user.entity';
 import { Transaction } from './transactions/entities/transaction.entity';
 import { TransactionsModule } from './transactions/transactions.module';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { TransactionsModule } from './transactions/transactions.module';
     }),
     TypeOrmModule.forFeature([User, Transaction]),
     AuthModule,
+    MailModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -7,11 +7,13 @@ import { User } from 'src/users/entities/user.entity';
 import { TransactionRepository } from './transactions.repository';
 import { UsersModule } from 'src/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
+import { MailModule } from 'src/mail/mail.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Transaction, User]),
     UsersModule,
+    MailModule,
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,

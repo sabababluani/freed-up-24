@@ -13,11 +13,7 @@ export class TransactionsService {
     );
   }
 
-  findAll() {
-    return `This action returns all transactions`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} transaction`;
+  createMail(userId: number, amount: number, method: string) {
+    return this.transactionRepository.createMail(userId, amount, method);
   }
 }
