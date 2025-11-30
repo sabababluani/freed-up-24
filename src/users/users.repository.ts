@@ -55,7 +55,6 @@ export class UsersRepository {
     const intervalMs = 7 * 24 * 60 * 60 * 1000;
 
     if (!user.lastProfitUpdate) {
-      // First-time calculation from money
       user.profit = +(user.money * 0.004).toFixed(2);
       user.income = +(user.money * 0.025).toFixed(2);
       user.loss = +(user.money * 0.05).toFixed(2);
@@ -75,7 +74,16 @@ export class UsersRepository {
           user.lastProfitUpdate.getTime() + periodsPassed * intervalMs,
         );
       }
+
+      const moneyDelta = user.money - (user.lastMoney ?? 0);
+      if (moneyDelta > 0) {
+        user.profit += +(moneyDelta * 0.004).toFixed(2);
+        user.income += +(moneyDelta * 0.025).toFixed(2);
+        user.loss += +(moneyDelta * 0.05).toFixed(2);
+      }
     }
+
+    user.lastMoney = user.money;
 
     await this.usersRepository.save(user);
     return user;

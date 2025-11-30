@@ -42,6 +42,9 @@ export class User extends BaseEntity {
   @Column({ type: 'float', default: 0 })
   loss: number;
 
+  @Column({ type: 'float', default: 0 })
+  lastMoney: number;
+
   @Column({ default: 'USD' })
   currency: string;
 
