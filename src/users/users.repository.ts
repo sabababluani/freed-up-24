@@ -51,39 +51,16 @@ export class UsersRepository {
 
     if (!user) throw new Error('User not found');
 
-    const now = new Date();
-    const intervalMs = 7 * 24 * 60 * 60 * 1000;
+    const PROFIT_RATE = 0.004; // 0.4%
+    const INCOME_RATE = 0.025; // 2.5%
+    const LOSS_RATE = 0.05; // 5%
 
-    if (!user.lastProfitUpdate) {
-      user.profit = +(user.money * 0.004).toFixed(2);
-      user.income = +(user.money * 0.025).toFixed(2);
-      user.loss = +(user.money * 0.05).toFixed(2);
-
-      user.lastProfitUpdate = now;
-    } else {
-      const diffInMs =
-        now.getTime() - new Date(user.lastProfitUpdate).getTime();
-      const periodsPassed = Math.floor(diffInMs / intervalMs);
-
-      if (periodsPassed > 0) {
-        user.profit *= 2 ** periodsPassed;
-        user.income *= 2 ** periodsPassed;
-        user.loss *= 2 ** periodsPassed;
-
-        user.lastProfitUpdate = new Date(
-          user.lastProfitUpdate.getTime() + periodsPassed * intervalMs,
-        );
-      }
-
-      const moneyDelta = user.money - (user.lastMoney ?? 0);
-      if (moneyDelta > 0) {
-        user.profit += +(moneyDelta * 0.004).toFixed(2);
-        user.income += +(moneyDelta * 0.025).toFixed(2);
-        user.loss += +(moneyDelta * 0.05).toFixed(2);
-      }
-    }
+    user.profit = +(+user.money * PROFIT_RATE).toFixed(2);
+    user.income = +(+user.money * INCOME_RATE).toFixed(2);
+    user.loss = +(+user.money * LOSS_RATE).toFixed(2);
 
     user.lastMoney = user.money;
+    user.lastProfitUpdate = new Date();
 
     await this.usersRepository.save(user);
     return user;
