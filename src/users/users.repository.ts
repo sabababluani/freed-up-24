@@ -49,6 +49,35 @@ export class UsersRepository {
       where: { id: userId },
     });
 
+    if (!user) throw new Error('User not found');
+
+    const now = new Date();
+
+    if (!user.lastProfitUpdate) {
+      user.profit = +(user.money * 0.004).toFixed(2);
+      user.income = +(user.money * 0.025).toFixed(2);
+      user.loss = +(user.money * 0.05).toFixed(2);
+
+      user.profit *= 2;
+      user.income *= 2;
+      user.loss *= 2;
+
+      user.lastProfitUpdate = now;
+    } else {
+      const diffInMs =
+        now.getTime() - new Date(user.lastProfitUpdate).getTime();
+      const weeksPassed = Math.floor(diffInMs / (7 * 24 * 60 * 60 * 1000));
+
+      if (weeksPassed > 0) {
+        user.profit *= 2 ** weeksPassed;
+        user.income *= 2 ** weeksPassed;
+        user.loss *= 2 ** weeksPassed;
+
+        user.lastProfitUpdate = now;
+      }
+    }
+
+    await this.usersRepository.save(user);
     return user;
   }
 

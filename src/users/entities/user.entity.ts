@@ -30,8 +30,17 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   phone: string;
 
-  @Column({ default: 0 })
+  @Column({ type: 'float', default: 0 })
   money: number;
+
+  @Column({ type: 'float', default: 0 })
+  profit: number;
+
+  @Column({ type: 'float', default: 0 })
+  income: number;
+
+  @Column({ type: 'float', default: 0 })
+  loss: number;
 
   @Column({ default: 'USD' })
   currency: string;
@@ -40,4 +49,7 @@ export class User extends BaseEntity {
     eager: true,
   })
   transactions: Transaction[];
+
+  @Column({ type: 'timestamp', nullable: true })
+  lastProfitUpdate: Date;
 }
