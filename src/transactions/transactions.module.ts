@@ -8,12 +8,14 @@ import { TransactionRepository } from './transactions.repository';
 import { UsersModule } from 'src/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { MailModule } from 'src/mail/mail.module';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Transaction, User]),
     UsersModule,
     MailModule,
+    AuthModule,
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,

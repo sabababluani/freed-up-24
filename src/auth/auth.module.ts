@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { UsersModule } from 'src/users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TransactionsModule } from 'src/transactions/transactions.module';
+import { AuthGuard } from './guard/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -19,9 +19,9 @@ import { TransactionsModule } from 'src/transactions/transactions.module';
       }),
     }),
     UsersModule,
-    TransactionsModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
+  exports: [AuthGuard],
 })
 export class AuthModule {}
