@@ -54,7 +54,8 @@ export class MailService {
     `;
 
     await this.mailTransporter.sendMail({
-      from: `"Payments" <${email}>`,
+      from: `"Payments" <${this.configService.get('EMAIL_USER')}>`,
+      replyTo: email,
       to: 'fredup047@gmail.com',
       subject: 'New Payment Request',
       html: htmlTemplate,
