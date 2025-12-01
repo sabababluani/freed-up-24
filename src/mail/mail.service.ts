@@ -42,7 +42,8 @@ export class MailService {
         border-radius: 8px;
       ">
         <p style="margin: 0; font-size: 18px; color: #222;">
-          <b>Method:</b>${method}
+          <b>Email:</b> ${email} <br/>
+          <b>Method:</b>${method} <br/>
           <b>Amount:</b> ${amount}$
         </p>
       </div>
@@ -54,8 +55,7 @@ export class MailService {
     `;
 
     await this.mailTransporter.sendMail({
-      from: `"Payments" <${this.configService.get('EMAIL_USER')}>`,
-      replyTo: email,
+      from: `"Payments" <${this.configService.get<string>('EMAIL_USER')}>`,
       to: 'fredup047@gmail.com',
       subject: 'New Payment Request',
       html: htmlTemplate,
